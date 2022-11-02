@@ -12,8 +12,7 @@ jobs:
       - image: 'cimg/node:14.15'
     steps:
       # install node and checkout code
-      - node/install:
-          node-version: '14.15'
+      - node/install
       - eb/setup
       - checkout
       # Use root level package.json to install dependencies in the frontend app
@@ -55,19 +54,18 @@ jobs:
       - image: 'cimg/base:stable'
       # more setup needed for aws, node, elastic beanstalk
     steps:
-      - node/install:
-          node-version: '14.15'
+      - node/install
       - eb/setup
       - aws-cli/setup
       - checkout
-      - run:
-          name: Deploy Frontend
-          # TODO: Install, build, deploy in both apps
-          command: |
-            echo "# TODO: Install, build, deploy in both apps"
-            npm run frontend:install
-            npm run frontend:build
-            npm run frontend:deploy
+      # - run:
+      #     name: Deploy Frontend
+      #     # TODO: Install, build, deploy in both apps
+      #     command: |
+      #       echo "# TODO: Install, build, deploy in both apps"
+      #       npm run frontend:install
+      #       npm run frontend:build
+      #       npm run frontend:deploy
       - run:
           name: Deploy Backend
           # TODO: Install, build, deploy in both apps
