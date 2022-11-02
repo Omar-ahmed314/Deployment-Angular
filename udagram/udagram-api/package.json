@@ -11,7 +11,7 @@
     "clean": "rm -rf www/ || true",
     "eb:init": "eb init udagram-api --platform node.js --region us-east-1",
     "deploy": "npm run eb:init && eb list && eb use udagram-api-dev && eb deploy",
-    "build": "npm run clean && npm run tsc && cp -rf src/config www/config && cp .npmrc www/.npmrc && cp package.json www/package.json && cd www && zip -r Archive.zip . && cd ..",
+    "build": "npm run clean && npm run tsc && cp -rf src/config www/config && cp .npmrc www/.npmrc  && cd www && zip -r Archive.zip . && cd ..",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
