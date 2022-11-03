@@ -10,7 +10,7 @@ jobs:
   build:
     docker:
       # the base image can run most needed actions with orbs
-      - image: 'cimg/node:16.15'
+      - image: 'cimg/node:16.15-browsers'
     steps:
       # install node and checkout code
       - node/install:
