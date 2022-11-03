@@ -14,7 +14,6 @@ jobs:
       # install node and checkout code
       - node/install:
           node-version: '16.15'
-      - eb/setup
       - checkout
       # Use root level package.json to install dependencies in the frontend app
       - run:
@@ -43,6 +42,12 @@ jobs:
           command: |
             echo "Build the frontend app"
             npm run frontend:build
+      # TODO: Test the frontend app
+      - run:
+          name: Front-End Testing
+          command: |
+            echo "Testing the frontend app"
+            npm run frontend:test
       # TODO: Build the backend API
       - run:
           name: API Build
@@ -62,7 +67,7 @@ jobs:
       - checkout
       - run:
           name: Deploy Frontend
-          # TODO: Install, build, deploy in both apps
+          # TODO: Install, build, deploy the frontend app
           command: |
             echo "# Install, build, deploy in both apps"
             npm run frontend:install
@@ -70,7 +75,7 @@ jobs:
             npm run frontend:deploy
       - run:
           name: Deploy Backend
-          # TODO: Install, build, deploy in both apps
+          # TODO: Install, build, deploy the APIs
           command: |
             echo "# Install, build, deploy in both apps"
             npm run api:install
@@ -80,7 +85,9 @@ jobs:
 workflows:
   udagram:
     jobs:
+      # Build the application
       - build
+      # Wait for the manual approval to proceed with deploy
       - hold:
           filters:
             branches:
@@ -89,6 +96,7 @@ workflows:
           type: approval
           requires:
             - build
+      # Deploy the application after the approval
       - deploy:
           requires:
             - hold
